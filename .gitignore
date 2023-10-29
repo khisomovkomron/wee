@@ -1,0 +1,13 @@
+.idea/
+*.pyc
+__pycache__/
+/Reports/*.json
+/Reports/*.png
+!/Reports/executor.json
+!/Reports/categories.json
+/webdrivers/
+/Reports/*
+/Tests/ui_tests/Reports/*.json
+/Tests/ui_tests/Reports/*.png
+/Tests/ui_tests/Reports/*
+/venv

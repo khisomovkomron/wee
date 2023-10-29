@@ -5,10 +5,9 @@ from allure_commons.types import AttachmentType
 from traceback import print_stack
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.edge.options import Options
 import allure
-
+import chromedriver_autoinstaller
 
 @pytest.fixture(scope="function", name="user_browser")
 def user_browser(request):
@@ -17,21 +16,12 @@ def user_browser(request):
 
 @pytest.fixture(scope="function", name="browser")
 def chrome(user_browser):
-    options = Options()
+    service = Service()
+    options = webdriver.ChromeOptions()
     with allure.step(f'Setting up browser {user_browser}... '):
         pass
-    if user_browser.lower() == "edge":
-        options = webdriver.EdgeOptions()
-        options.set_capability("selenoid:options", {"enableVNC": True})
-        browser = webdriver.Remote(command_executor="http://docker-infra.bastion-tech.ru:4444/wd/hub",
-                                   options=options)
-        browser.maximize_window()
-        yield browser
-        with allure.step('Shutting down browser... '):
-            pass
-        browser.quit()
-    elif user_browser.lower() == 'local_chrome':
-        browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    if user_browser.lower() == 'local_chrome':
+        browser = webdriver.Chrome(service=service, options=options)
         browser.maximize_window()
         yield browser
         browser.quit()
@@ -39,13 +29,7 @@ def chrome(user_browser):
 
 def pytest_addoption(parser):
     parser.addoption("--browser", help='Browser to start tests')
-    parser.addoption('--stand', help='Stand to start tests')
     parser.addoption("--osType", help="Type of operating system")
-
-
-@pytest.fixture(scope="function")
-def stand(request):
-    return request.config.getoption("stand")
 
 
 def pytest_collection_modifyitems(items):

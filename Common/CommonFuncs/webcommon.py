@@ -33,29 +33,19 @@ class WebDriverFactory:
         cls.RANDOM_COMMENT = f'auto_comment_{random.randint(100, 10000)}'
         return cls.RANDOM_COMMENT
 
-    def __init__(self, browser, stand, timeout=10):
+    def __init__(self, browser, timeout=10):
         self.browser = browser
-        self.stand = stand
         self.browser.implicitly_wait(timeout)
 
-    def open(self, page):
+    def open(self):
         base_url = URL_CONFIG.get('base_url')
-        if URL_CONFIG.get(page):
-            page = URL_CONFIG.get(page)
-        else:
-            page = page
+        # if URL_CONFIG.get(page):
+        #     page = URL_CONFIG.get(page)
+        # else:
+        #     page = page
         try:
-            if self.stand == 'dev_wee':
-                self.browser.get(f'{base_url}{page}')
-                logger.info(f'Opened page with URL: {base_url}{page}')
-            elif self.stand == 'prod_wee':
-                self.browser.get(f'{URL_CONFIG.get("base_wee_url")}{page}')
-                logger.info(f'Opened page with URL: {URL_CONFIG.get("base_wee_url")}{page}')
-            else:
-                self.browser.get(f'{base_url}{page}')
-
-
-
+            self.browser.get("https://wee.ae")
+            logger.info(f'Opened page with URL: {base_url}')
         except Exception as e:
             logger.error(f'ERROR: {e}. Can\'t initiate browser instance')
             raise Exception
