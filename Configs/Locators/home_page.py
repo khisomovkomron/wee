@@ -1,5 +1,5 @@
 HOME_PAGE = {
-    'profile': {'type': 'xpath', 'locator': '//nav//section[@aria-label="User"]'},
+    'profile': {'type': 'xpath', 'locator': '//section[@aria-label="User"]//span'},
     'code_button': {'type': 'xpath', 'locator': '//button[@class="select-code d-flex justify-between align-center"]'},
     'rus_code': {'type': 'xpath', 'locator': '(//button[@class="phone-code-modal--string d-flex"])[3]'},
     'code_input': {'type': 'xpath', 'locator': '(//div[@class="input-phone"])[1]//input'},

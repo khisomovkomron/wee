@@ -152,7 +152,7 @@ class Assertions(WebDriverFactory):
             with allure.step('Expected element is displayed'):
                 pass
 
-    def assert_element_contains_text(self, expected_text, locator='', locator_type='css', case_sensitive=False,
+    def assert_element_contains_text(self, expected_text, locator='', locator_type='xpath', case_sensitive=False,
                                      element: WebElement = None, is_input=False, element_name=None):
 
         if is_input:

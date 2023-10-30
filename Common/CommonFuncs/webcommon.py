@@ -45,6 +45,7 @@ class WebDriverFactory:
         #     page = page
         try:
             self.browser.get("https://wee.ae")
+            self.browser.implicitly_wait(time_to_wait=7)
             logger.info(f'Opened page with URL: {base_url}')
         except Exception as e:
             logger.error(f'ERROR: {e}. Can\'t initiate browser instance')

@@ -16,6 +16,6 @@ class HomePage(WebDriverFactory):
 
     def assert_profile_name(self):
         assertion = Assertions(self.browser)
-        assertion.assert_element_contains_text('Komron', locator_type='xpath', locator=self.PROFILE_NAME)
+        assertion.assert_element_contains_text('Komron', locator=self.PROFILE_NAME)
 
 

@@ -83,8 +83,8 @@ class Waiting:
                 pass
         return element
 
-    def wait_until_text_to_be_present_in_element(self, text, locator_text, locator_type='xpath', timeout=5,
-                                                 poll_frequency=0.5, is_input=False):
+    def wait_until_text_to_be_present_in_element(self, text, locator_text, locator_type='xpath', timeout=10,
+                                                 poll_frequency=1, is_input=False):
         element = None
         try:
             locator_type = self.get_by_type(locator_type)
@@ -115,4 +115,20 @@ class Waiting:
             logger.info(f"URL wasn't changed to {expected_url}")
             with allure.step(f"URL wasn't changed to {expected_url}"):
                 pass
+
+    def wait_until_button_clickable(self, locator_text, locator_type='xpath', timeout=10, poll_frequency=0.5):
+        try:
+            locator_type = self.get_by_type(locator_type)
+            wait = WebDriverWait(self.browser, timeout=timeout,
+                                 poll_frequency=poll_frequency,
+                                 ignored_exceptions=[NoSuchElementException,
+                                                     ElementNotVisibleException,
+                                                     ElementNotSelectableException])
+
+            element = wait.until(EC.element_to_be_clickable((locator_type, locator_text)))
+        except:
+            logger.info(f"Button {locator_text} is not clickable")
+            with allure.step(f"Button {locator_text} is not clickable"):
+                pass
+        return element
 
