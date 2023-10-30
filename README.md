@@ -5,7 +5,7 @@
 - poetry shell 
 - poetry install
 - cd /Tests/ui_tests
-- pytest --browser=local_chrome 
+- pytest --browser=local_chrome -s -v 
 
 
 Запустить образ сразу с тестами (данный метод лучше настроить для CI/CD)
