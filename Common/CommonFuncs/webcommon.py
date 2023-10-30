@@ -68,7 +68,7 @@ class WebDriverFactory:
     def quit(self):
         self.browser.quit()
 
-    def is_element_displayed(self, locator='', locator_type='css', element: WebElement = None):
+    def is_element_displayed(self, locator='', locator_type='xpath', element: WebElement = None):
         """Checks if element is visible and returns True or False
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -88,7 +88,7 @@ class WebDriverFactory:
         else:
             return False
 
-    def send_file(self, path, locator='', locator_type='css', element: WebElement = None):
+    def send_file(self, path, locator='', locator_type='xpath', element: WebElement = None):
         """ Sending file by file PATH
         @param path: PATH of file to sending
         @param locator: Locator of element in the page
@@ -103,7 +103,7 @@ class WebDriverFactory:
 
         input_filed.send_keys(f'{os.path.normpath(os.getcwd()+path)}')
 
-    def click(self, locator='', locator_type='css', element: WebElement = None):
+    def click(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Can click by locator & type or by WebElement
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - CSS)
@@ -122,7 +122,7 @@ class WebDriverFactory:
         with allure.step(f'Clicked at element {locator}'):
             pass
 
-    def get_element_text(self, locator='', locator_type='css', element: WebElement = None):
+    def get_element_text(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Returns element's text by locator & type or by WebElement
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -137,7 +137,7 @@ class WebDriverFactory:
 
         return element_text
 
-    def get_input_value(self, locator='', locator_type='css', element: WebElement = None):
+    def get_input_value(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Returns input's value by locator & type or by WebElement
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -152,7 +152,7 @@ class WebDriverFactory:
 
         return element_text
 
-    def is_element_present(self, locator, locator_type='css'):
+    def is_element_present(self, locator, locator_type='xpath'):
         """This method checks that element is exists in DOM
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - css)"""
@@ -162,7 +162,7 @@ class WebDriverFactory:
             return False
         return True if element else False
 
-    def get_element_href(self, locator='', locator_type='css', element: WebElement = None):
+    def get_element_href(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Returns element's attribute href by locator & type or by WebElement
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -177,7 +177,7 @@ class WebDriverFactory:
 
         return element_href
 
-    def move_to_element(self, locator='', locator_type='css', element: WebElement = None):
+    def move_to_element(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Move to element method
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - CSS)
@@ -191,7 +191,7 @@ class WebDriverFactory:
 
         actions.move_to_element(element).perform()
 
-    def execute_script_click(self, locator='', locator_type='css', element: WebElement = None):
+    def execute_script_click(self, locator='', locator_type='xpath', element: WebElement = None):
         """This method is executed JS-script that clicked on element
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -205,7 +205,7 @@ class WebDriverFactory:
 
         self.browser.execute_script("arguments[0].click();", element)
 
-    def scroll_into_view(self, locator='', locator_type='css', element: WebElement = None):
+    def scroll_into_view(self, locator='', locator_type='xpath', element: WebElement = None):
         """This method is executed JS-script that scrolls page into view of element
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -223,7 +223,7 @@ class WebDriverFactory:
         alert = self.browser.switch_to.alert
         alert.dismiss()
 
-    def get_element_attribute(self, attr_name: str, locator='', locator_type='css', element: WebElement = None):
+    def get_element_attribute(self, attr_name: str, locator='', locator_type='xpath', element: WebElement = None):
         """This method is executed JS-script that scrolls page into view of element
         @param attr_name: Name of attribute that you want to know (e.g. name, value, color, etc.)
         @param locator: Locator of element in the page
@@ -264,7 +264,7 @@ class WebDriverFactory:
             logger.info(f"Locator type {locator_type} not correct/supported")
         return False
 
-    def get_element(self, locator: str, locator_type="css"):
+    def get_element(self, locator: str, locator_type="xpath"):
         """Returns WebElement by locator text & locator type
         @param locator: text of locator
         @param locator_type: id/name/xpath/css/class/link"""
@@ -281,7 +281,7 @@ class WebDriverFactory:
             logger.info(f"Element not found. Locator {locator}. Type:{locator_type}")
         return element
 
-    def get_elements(self, locator: str, locator_type="css"):
+    def get_elements(self, locator: str, locator_type="xpath"):
         """Returns WebElement by locator text & locator type
         @param locator: text of locator
         @param locator_type: id/name/xpath/css/class/link"""
@@ -298,7 +298,7 @@ class WebDriverFactory:
             logger.info(f"Elements not found. Locator {locator}. Type:{locator_type}")
         return element
 
-    def send_keys(self, data: str, locator='', locator_type='css', element: WebElement = None):
+    def send_keys(self, data: str, locator='', locator_type='xpath', element: WebElement = None):
         """ You can send text to founded element or send it by locator data (e.g. locator + locator type)
         @param data: Text you want to send in element
         @param locator: Locator of element in the page
@@ -323,7 +323,7 @@ class WebDriverFactory:
                          f"locator_type: {locator_type}")
             raise Exception
 
-    def clear_field(self, locator='', locator_type='css', element: WebElement = None):
+    def clear_field(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Cleaning field founded by locator text &
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -343,7 +343,7 @@ class WebDriverFactory:
             logger.error(f"ERROR: {e}. Can\'t clear field with locator: {locator} and locator_type: {locator_type}")
             raise Exception
 
-    def get_text(self, locator='', locator_type='css', element: WebElement = None):
+    def get_text(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Returns text of element
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - XPATH)
@@ -362,7 +362,7 @@ class WebDriverFactory:
                          f"locator_type: {locator_type}")
             raise Exception
 
-    def element_presence_check(self, locator, locator_type='css'):
+    def element_presence_check(self, locator, locator_type='xpath'):
         Waiting(self.browser).wait_until_visibility_of_element(locator, locator_type)
         element_list = self.get_elements(locator, locator_type)
         if len(element_list) > 0:
@@ -396,7 +396,7 @@ class WebDriverFactory:
         """Switching to alert"""
         return self.browser.switch_to.active_element
 
-    def switch_to_iframe(self, locator='', locator_type='css', element: WebElement = None):
+    def switch_to_iframe(self, locator='', locator_type='xpath', element: WebElement = None):
         """ Switching to iframe
         @param locator: Locator of element in the page
         @param locator_type: Type of the locator on page (by default - css)

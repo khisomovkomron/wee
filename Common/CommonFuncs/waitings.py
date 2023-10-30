@@ -33,7 +33,10 @@ class Waiting:
             logger.info(f"Locator type {locator_type}  not correct/supported")
         return False
 
-    def explicit_wait(self, locator_type='css', locator_text='', timeout=10, element: WebElement = None):
+    def implicit_wait(self, timeout=10):
+        wait = WebDriverWait(self.browser, timeout=timeout)
+
+    def explicit_wait(self, locator_type='xpath', locator_text='', timeout=10, element: WebElement = None):
         try:
             if element:
                 WebDriverWait(self.browser, timeout=timeout).until(EC.element_to_be_clickable(element))
@@ -46,7 +49,7 @@ class Waiting:
         except:
             logger.info(f"Element is not clickable")
 
-    def wait_until_invisibility_of_element(self, locator_type='css', locator='', timeout=5, poll_frequency=0.5):
+    def wait_until_invisibility_of_element(self, locator_type='xpath', locator='', timeout=5, poll_frequency=0.5):
         try:
             wait = WebDriverWait(self.browser, timeout=timeout,
                                  poll_frequency=poll_frequency,
@@ -62,7 +65,7 @@ class Waiting:
                 pass
             logger.info(f"Element: {locator} not invisible on the web page")
 
-    def wait_until_visibility_of_element(self, locator_text, locator_type='css', timeout=5, poll_frequency=1):
+    def wait_until_visibility_of_element(self, locator_text, locator_type='xpath', timeout=5, poll_frequency=1):
         element = None
         try:
             locator_type = self.get_by_type(locator_type)
@@ -80,7 +83,7 @@ class Waiting:
                 pass
         return element
 
-    def wait_until_text_to_be_present_in_element(self, text, locator_text, locator_type='css', timeout=5,
+    def wait_until_text_to_be_present_in_element(self, text, locator_text, locator_type='xpath', timeout=5,
                                                  poll_frequency=0.5, is_input=False):
         element = None
         try:
@@ -113,15 +116,3 @@ class Waiting:
             with allure.step(f"URL wasn't changed to {expected_url}"):
                 pass
 
-    # def wait_until_visibility_of_element(self, locator_text, locator_type='css', timeout=5):
-    #     element = None
-    #     try:
-    #         locator_type = self.get_by_type(locator_type)
-    #         logger.info("Waiting for maximum :: " + str(timeout) +
-    #                     f" :: seconds for element: {locator_text} to be clickable")
-    #         wait = WebDriverWait(self.browser, timeout=timeout)
-    #         element = wait.until(EC.visibility_of_element_located((locator_type, locator_text)))
-    #         logger.info(f"Element: {locator_text} appeared on the web page")
-    #     except:
-    #         logger.info(f"Element: {locator_text} not appeared on the web page")
-    #     return element

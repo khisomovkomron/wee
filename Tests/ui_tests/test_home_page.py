@@ -1,3 +1,5 @@
+import time
+
 from Pages.PageObjects.ui_pages.HomePage import HomePage
 from Common.CommonFuncs.assertions import Assertions
 from Common.CommonFuncs.waitings import Waiting
@@ -10,11 +12,16 @@ class TestTable:
         page = HomePage(browser)
         assertion = Assertions(browser)
         page.open()
-        # page.click(locator=page.ACTION_LOG_MENU)
-        # assertion.assert_url_contains('action_log')
-        # page.assert_filter_btns()
-        # page.assert_table_titles()
-        # page.assert_table_cells()
+        Waiting(browser).explicit_wait(locator_text=page.PROFILE)
+        page.click(locator=page.PROFILE)
+        page.click(locator=page.CODE_BUTTON)
+        page.click(locator=page.RUS_CODE)
+        page.send_keys('9771858108',locator=page.CODE_INPUT)
+        page.click(locator=page.LOG_IN_BUTTON)
+        browser.implicitly_wait(time_to_wait=10)
+        time.sleep(5)
+        page.assert_profile_name()
+
 
     # def test_2(self, browser, stand):
     #     page = HomePage(browser, stand)
